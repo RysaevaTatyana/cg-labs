@@ -51,7 +51,7 @@ for line in file:
 for i in range(len(v)):
     y =floor(-10000*v[i][1])+1000
     x = floor(10000*v[i][0])+1000
-    img_mat[y,x] =72,6,7
+    img_mat[y,x] = 72,6,7
 
 for i in range(len(f)):
     x0 = floor(10000*v[f[i][0]-1][0])+1000
