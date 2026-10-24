@@ -1,4 +1,3 @@
-from  random import randint 
 from math import ceil,floor
 import numpy as np
 import PIL.Image as Image
