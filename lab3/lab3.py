@@ -13,8 +13,7 @@ def baricentric_coordinates(x,y, x0, y0, x1 , y1,  x2,  y2):
     lambda2 = 1.0 - lambda0 - lambda1
     return lambda0, lambda1, lambda2, False
 @njit
-def draw_triangle(x0, y0,z0, x1, y1,z1, x2,y2, z2, a,b,c,img_mat, z_buffer):
-   
+def draw_triangle(x0, y0,z0, x1, y1,z1, x2,y2, z2, a,b,c,img_mat, z_buffer):  
     xmin = floor(min(x0,min(x1,x2))) if min(x0,min(x1,x2))>=0 else 0 
     ymin = floor(min(y0,min(y1,y2))) if min(y0,min(y1,y2))>=0 else 0
     xmax = ceil(max(x0,max(x1,x2))) if max(x0,max(x1,x2))<=img_mat.shape[1]-1 else img_mat.shape[1]-1
@@ -36,7 +35,6 @@ def draw_triangle(x0, y0,z0, x1, y1,z1, x2,y2, z2, a,b,c,img_mat, z_buffer):
                     z_buffer[y,x] = z
 @njit                    
 def render_model(f,v, SCALE, z_buffer,  img_mat, C_X, C_Y):
-    
     for i in range(len(f)):
         x0 = v[f[i][0]][0]
         y0 = v[f[i][0]][1]
@@ -174,3 +172,4 @@ if __name__ == '__main__':
     scene = Scene("model.obj")
     renderer = Renderer(1000, 1000, 5000.0)
     App(scene, renderer, 500, 500).run()
+    
