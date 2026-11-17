@@ -3,7 +3,7 @@ from math import ceil,floor
 import numpy as np
 from PIL import Image, ImageTk
 import tkinter as tk
-@njit
+@njit(cache=True)
 def baricentric_coordinates(x,y, x0, y0, x1 , y1,  x2,  y2):
     denom = (x0 - x2) * (y1 - y2) - (x1 - x2) * (y0 - y2)
     if denom==0: 
@@ -12,7 +12,7 @@ def baricentric_coordinates(x,y, x0, y0, x1 , y1,  x2,  y2):
     lambda1 = ((x0 - x2) * (y - y2) - (x - x2) * (y0 - y2)) /denom
     lambda2 = 1.0 - lambda0 - lambda1
     return lambda0, lambda1, lambda2, False
-@njit
+@njit(cache=True)
 def draw_triangle(x0, y0,z0, x1, y1,z1, x2,y2, z2, a,b,c,img_mat, z_buffer):  
     xmin = floor(min(x0,min(x1,x2))) if min(x0,min(x1,x2))>=0 else 0 
     ymin = floor(min(y0,min(y1,y2))) if min(y0,min(y1,y2))>=0 else 0
@@ -33,7 +33,7 @@ def draw_triangle(x0, y0,z0, x1, y1,z1, x2,y2, z2, a,b,c,img_mat, z_buffer):
                     img_mat[y, x, 1] = b
                     img_mat[y, x, 2] = c
                     z_buffer[y,x] = z
-@njit                    
+@njit(cache=True)
 def render_model(f,v, SCALE, z_buffer,  img_mat, C_X, C_Y):
     for i in range(len(f)):
         x0 = v[f[i][0]][0]
